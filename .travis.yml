@@ -1,0 +1,17 @@
+language: cpp
+compiler:
+  - clang
+  - gcc
+env:
+  - OPTIONS="-DCRYPTOPP_DISABLE_ASM=OFF"
+  - OPTIONS="-DCRYPTOPP_DISABLE_SSSE3=OFF"
+  - OPTIONS="-DCRYPTOPP_DISABLE_AESNI=OFF"
+install:
+  - sudo apt-get update >/dev/null
+  - sudo apt-get -q install cmake
+script:
+  - mkdir build
+  - cd build
+  - cmake .. $OPTIONS
+  - cmake --build .
+  - ctest --verbose
